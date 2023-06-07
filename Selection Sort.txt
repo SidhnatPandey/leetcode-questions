@@ -1,0 +1,61 @@
+import java.util.*;
+public class Main{
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("=============================== Program to Sort the Array using Selection sort ============================");
+		System.out.print("Please Enter the length of Array: ");
+		int n = sc.nextInt();
+		int arr[] = new int[n];
+		System.out.print("Please Enter the "+ n +" elements in the array: ");
+		for(int i=0; i<n; i++){
+		    arr[i] = sc.nextInt();
+		}
+		
+		//logic for sorting the array
+		
+		for(int i=0; i<n-1; i++){
+		    int minI=i, minE = arr[i];
+		    for(int j=i+1; j<n; j++){
+		        if(minE>arr[j]) {
+		            minI = j;
+		            minE = arr[j];
+		        }
+		    }
+		    if(minI != i){
+		        swap(arr, i, minI);
+		    }
+		}
+		
+		System.out.print("Sorted array is : ");
+		for(int i:arr){
+		    System.out.print(i+" ");
+		}
+	}
+	static void swap(int arr[], int i, int j){
+	    int left = arr[i];
+	    arr[i] = arr[j];
+	    arr[j] = left;
+	}
+}
+
+//TIME COMPLEXITY: O(N^2)
+//SPACE COMPLEXITY: O(1)
+/*
+        n = 6
+        arr: 4 1 9 2 3 6
+        CODE DRY-RUN
+		1-st iteration
+		1 4 9 2 3 6
+		
+		2-nd iteartion
+		1 2 9 4 3 6
+		
+		3-rd iteration
+		1 2 3 4 9 6
+        
+        4rth iteartion
+        1 2 3 4 9 6
+        
+        5-th iteration
+        1 2 3 4 6 9
+*/

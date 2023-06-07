@@ -1,0 +1,51 @@
+import java.util.*;
+public class Main{
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("=============================== Program to Sort the Array using Quick Sort ============================");
+		System.out.print("Please Enter the length of Array: ");
+		int n = sc.nextInt();
+		int arr[] = new int[n];
+		System.out.print("Please Enter the "+ n +" elements in the array: ");
+		for(int i=0; i<n; i++){
+		    arr[i] = sc.nextInt();
+		}
+		
+		//logic for sorting the array
+		
+		QuickSort(arr, 0, n-1);
+		
+		System.out.print("Sorted array is : ");
+		for(int i:arr){
+		    System.out.print(i+" ");
+		}
+	}
+	
+	static void QuickSort(int a[], int l, int h){
+	    if(l<h){
+	        int pivot = partition(a, l, h);
+	        QuickSort(a, l, pivot-1);
+	        QuickSort(a, pivot+1, h);
+	    }
+	}
+	static int partition(int a[], int l, int h){
+	    int pivot = a[l];
+	    int i=l, j=h;
+	    while(i<j){
+    	    while(a[i]<=pivot) i++;
+    	    while(a[j]>pivot) j--;
+    	    if(i<j) swap(a, i, j);
+	    }
+	    swap(a, j, l);
+	    return j;
+	}
+	
+	static void swap(int arr[], int i, int j){
+	    int left = arr[i];
+	    arr[i] = arr[j];
+	    arr[j] = left;
+	}
+}
+
+//TIME COMPLEXITY: O(N*log(N))
+//SPACE COMPLEXITY: O(1)

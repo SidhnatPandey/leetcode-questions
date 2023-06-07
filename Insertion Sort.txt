@@ -1,0 +1,53 @@
+import java.util.*;
+public class Main{
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("=============================== Program to Sort the Array using Insertion sort ============================");
+		System.out.print("Please Enter the length of Array: ");
+		int n = sc.nextInt();
+		int arr[] = new int[n];
+		System.out.print("Please Enter the "+ n +" elements in the array: ");
+		for(int i=0; i<n; i++){
+		    arr[i] = sc.nextInt();
+		}
+		
+		//logic for sorting the array
+		
+		for(int i=1; i<n; i++){
+		    int temp = arr[i];
+		    int j = i-1;
+		    while(j>=0 && arr[j]>temp){
+		        arr[j+1] = arr[j];
+		        j--;
+		    }
+		    arr[j+1] = temp;
+		}
+		
+		System.out.print("Sorted array is : ");
+		for(int i:arr){
+		    System.out.print(i+" ");
+		}
+	}
+}
+
+//TIME COMPLEXITY: O(N^2)
+//SPACE COMPLEXITY: O(1)
+/*
+        n = 6
+        arr: 8 4 1 5 9 2
+        CODE DRY-RUN
+		1-st iteration
+		4 8 1 5 3 2
+		
+		2-nd iteartion
+		1 4 8 5 3 2
+		
+		3-rd iteration
+		1 4 5 8 2 3
+        
+        4rth iteartion
+        1 2 4 5 8 3
+        
+        5-th iteration
+        1 2 3 4 5 8
+*/
