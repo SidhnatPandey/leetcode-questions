@@ -1,0 +1,74 @@
+import java.util.*;
+public class Main
+{
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("=============================== Program to find the minimum number of pages for a given array ============================");
+		System.out.print("Please Enter the length of Array: ");
+		int n = sc.nextInt();
+		int arr[] = new int[n];
+		System.out.print("Please Enter the "+ n +" elements in the array: ");
+		for(int i=0; i<n; i++){
+		    arr[i] = sc.nextInt();
+		}
+		System.out.print("Please Enter the number of Students: ");
+		int students = sc.nextInt();
+		
+		System.out.println("Minimum number of pages : "+minPages(arr, students));
+	}
+	
+	//function to check weather subarray with value of sum is present or not
+	static int minPages(int a[], int k){
+	    int min = max(a);
+	    int max = sum(a);
+	    
+	    int res = 0;
+	    while(min <= max){
+	        int mid = (min+max)/2;
+	        if(isFeasible(a, k, mid)){
+	            res = mid;
+	            max = mid-1;
+	        }else{
+	            min = mid+1;
+	        }
+	    }
+	    return max;
+	}
+	
+	//Check weather feasible or not
+	static boolean isFeasible(int a[], int k, int res){
+	    int st = 1, sum=0;
+	    for(int i=0; i<a.length; i++){
+	        if(st+a[i] > res){
+	            st++;
+	            sum = a[i];
+	        }else{
+	            sum += a[i];
+	        }
+	    }
+	    return st<=k;
+	}
+	static int max(int a[]){
+	    int max = Integer.MIN_VALUE;
+	    for(int p:a){
+	        max = Math.max(max, p);
+	    }
+	    return max;
+	}
+	static int sum(int a[]){
+	    int sum = 0;
+	    for(int p:a){
+	        sum += p;
+	    }
+	    return sum;
+	}
+}
+
+//TIME COMPLEXITY: O(N*log(N))
+//SPACE COMPLEXITY: O(1)
+/*
+        CODE DRY-RUN
+		
+		
+*/
+		
