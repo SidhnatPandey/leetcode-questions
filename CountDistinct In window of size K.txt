@@ -1,0 +1,70 @@
+import java.util.*;
+public class Main
+{
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("=============================== Program to find the Distinct Elements of size k from the given array ============================");
+		System.out.print("Please Enter the length of Array: ");
+		int n = sc.nextInt();
+		int arr[] = new int[n];
+		System.out.print("Please Enter the "+ n +" elements in the array: ");
+		for(int i=0; i<n; i++){
+		    arr[i] = sc.nextInt();
+		}
+		System.out.print("Please Enter the window size: ");
+		int students = sc.nextInt();
+		
+		System.out.println("Distinct elements in the window is : ");
+		minPages(arr, students);
+	}
+	
+	//function to check weather subarray with value of sum is present or not
+	static void minPages(int a[], int k){
+	    HashMap<Integer, Integer> map = new HashMap<>();
+	    for(int i=0; i<k; i++){
+	        map.put(a[i], map.getOrDefault(a[i], 0)+1);
+	    }
+	    System.out.println("Element in the 0th window"+map.size());
+	    for(int i=k; i<a.length; i++){
+	        if(map.get(a[i-k]) == 1){
+	            map.remove(a[i-k]);
+	        }else{
+	            map.put(a[i-k], map.get(a[i-k])-1);
+	        }
+	        map.put(a[i], map.getOrDefault(a[i], 0)+1);
+	        System.out.println("Elements in window "+ (i-k+1) +" : "+map.size());
+	    }
+	}
+	
+}
+
+//TIME COMPLEXITY: O(N)
+//SPACE COMPLEXITY: O(K)
+/*
+        1 2 2 1 3 1 1 3
+        CODE DRY-RUN
+	    1st Iteration
+	    
+	    1 -> 2
+	    2 -> 2
+	    
+	    2nd Iteration
+	    
+	    1 -> 1
+	    2 -> 2
+	    3 -> 1
+	    
+	    3rd Iteration
+	    
+	    1 -> 2
+	    2 -> 1
+        3 -> 1	
+        
+        4rth Iteration
+        1 -> 3
+        3 -> 1
+        
+        5th Iteration
+        1 -> 2
+        3 -> 2
+*/
