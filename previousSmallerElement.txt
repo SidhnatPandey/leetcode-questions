@@ -1,0 +1,26 @@
+public class myStack{
+    void previousSmaller(int a[]){
+        Stack<Integer> s = new Stack<>();
+        for(int i=0; i<a.length; i++){
+            while(!s.isEmpty() && s.peek()>=a[i]){
+                s.pop();
+            }
+            if(s.isEmpty()){
+                print(-1);
+            }else{
+                print(s.peek());
+            }
+            s.push(a[i]);
+        }
+    }
+    
+}
+
+
+
+
+/*
+TC : O(N)
+SC : O(N)
+
+*/
