@@ -1,0 +1,41 @@
+public class myStack{
+    Node head;
+    int size;
+    public myStack(){
+        head = null;
+        size = 0;
+    }
+    
+    void push(int data){
+        Node temp = new Node(data);
+        temp.next = head;
+        size++;
+        head = temp;
+    }
+    
+    int peek(){
+        if(head == null){
+            throw new Exception();
+        }
+        return head.data;
+    }
+    
+    int pop(){
+        if(head == null){
+            throw new Exception();
+        }
+        int res = head.data;
+        head = head.next;
+        size--;
+        return res;
+    }
+    
+    boolean isEmpty(){
+        return head == null;
+    }
+    
+    int size(){
+        return size;
+    }
+    
+}
