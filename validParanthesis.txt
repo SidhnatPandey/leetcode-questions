@@ -1,0 +1,44 @@
+import java.util.Scanner;
+
+public class Main{
+	public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a String : ");
+        String str = sc.nextInt();
+        if(validParathensis(str)){
+            System.out.println("Valid String");
+        }else{
+            System.out.println("Invalid String");
+        }
+	}
+	
+	public boolean validParathensis(String str){
+	    Stack<Character> stack = new Stack<>();
+	    Map<Character, Character> map = new HashMap<>();
+	    map.put('(', ')');
+	    map.put('{', '}');
+	    map.put('[', ']');
+	    for(char ch:str.toCharArray()){
+	        if(!stack.isEmpty() && stack.peek() == map.get(ch)){
+	            stack.pop();
+	        }else{
+	            stack.push(ch);
+	        }
+	    }
+	    
+	    return stack.isEmpty();
+	}
+}
+
+
+
+/*
+TC : O(N)
+SC : O(N)
+
+
+***********************************DRY-RUN******************************************
+
+
+
+*/
