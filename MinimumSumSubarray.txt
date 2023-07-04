@@ -1,0 +1,74 @@
+class Solution {
+    public int minSubArrayLen(int target, int[] nums) {
+        int left = 0, right = 0, sumOfCurrentWindow = 0;
+
+        int res = Integer.MAX_VALUE;
+        while(right<nums.length){
+            sumOfCurrentWindow += nums[right++];
+            while(sumOfCurrentWindow >= target){
+                res = Math.min(res, right-left);
+                sumOfCurrentWindow -= nums[left++];
+            }
+        }
+        return res == Integer.MAX_VALUE ? 0 : res;
+    }
+}
+
+
+/*
+
+TC : O(N)
+SC : O(N)
+
+*********************************************DRY-RUN**************************************************
+
+LETSAY WE HAVE GIVEN AN ARRAY NUMS : [2, 3, 1, 2, 4, 3] TARGET = 7
+
+WE WILL TAKE TWO POINTER LEFT AND RIGHT AND ONE VARIABLE SUM WHICH WILL STORE THE SUBARRAY SUM BETWEEN LEFT AND RIGHT 
+ONE MORE POINTER RES WHICH WILL STORE THE ANSWER OF THE ARRAY AND INITIALIZE IT WITH Integer.MAX_VALUE 
+
+//ROUND : 1 
+LEFT = 0
+RIGHT = 3
+SUM = 7
+RES = 3
+
+//ROUND : 2
+LEFT = 1
+RIGHT = 3
+SUM = 5
+RES = 3
+
+//ROUND : 3
+LEFT = 1
+RIGHT = 4
+SUM = 10
+RES = 3
+
+//ROUND : 4
+LEFT = 2
+RIGHT = 4
+SUM = 7
+RES = 2
+
+//ROUND : 5
+LEFT = 3
+RIGHT = 4
+SUM = 6
+RES = 2
+
+//ROUND : 6
+LEFT = 3
+RIGHT = 5
+SUM = 9
+RES = 2
+
+//ROUND : 7
+LEFT = 4
+RIGHT = 5
+SUM = 7
+RES = 2
+
+AT EACH STAE WE WILL UPDAT THE VALUE OF RESULTAND VARIABLE
+
+*/
