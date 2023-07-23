@@ -1,0 +1,28 @@
+class Solution {
+    public static final int MOD = 1000000007;
+
+    private static int countWaysHelper(int n, int x, int num, Map<String, Integer> memo){
+        if(n==0) return 1;
+        if(n<0 || Math.pow(num, x) > n) return 0;
+
+        String key = n+" "+num;
+        if(memo.containsKey(key)){
+            return memo.get(key);
+        }
+
+        int includeCurrent = countWaysHelper(n-(int) Math.pow(num, x), x, num+1, memo);
+        includeCurrent %= MOD;
+
+        int excludeCurrent = countWaysHelper(n, x, num+1, memo);
+        excludeCurrent %= MOD;
+
+        int totalWays = (includeCurrent + excludeCurrent) % MOD;
+
+        memo.put(key, totalWays);
+        return totalWays;
+    }
+
+    public int numberOfWays(int n, int x) {
+        return countWaysHelper(n, x, 1, new HashMap<>());
+    }
+}
