@@ -1,0 +1,30 @@
+class Solution
+{
+    public int kthAncestor(Node root, int k, int node){
+        HashMap<Integer, Integer> map = new HashMap<>();
+        map.put(root.data, -1);
+        dfs(root, k, node, map);
+        int p = node;
+        for(int i=0; i<k; i++){
+            if(map.containsKey(p)) p = map.get(p);
+        }
+        return p;
+    }
+    int flag = 0;
+    public void dfs(Node node, int k, int n, HashMap<Integer, Integer> map){
+        if(node.data==n){
+            flag = 1;
+            return;
+        }
+        if(node.left!=null && flag==0){
+            map.put(node.left.data, node.data);
+            dfs(node.left, k, n, map);
+        }
+        if(node.right!=null && flag==0){
+            map.put(node.right.data, node.data);
+            dfs(node.right, k, n, map);
+        }
+        return;
+    }
+    
+}

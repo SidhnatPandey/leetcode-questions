@@ -1,0 +1,15 @@
+//level order traversal
+        ListList<List<Integer>> ans = new ArrayList<>();
+        Queue<Node> q = new LinkedList<>();
+        q.add(root);
+        while(!q.isEmpty()){
+            int n = q.size();
+            List<Integer> list = new ArrayList<>();
+            while(n-- >0){
+                Node temp = q.poll();
+                list.add(temp.data);
+                if(temp.left!=null) q.add(temp.left);
+                if(temp.right!=null) q.add(temp.right);
+            }
+            ans.add(list);
+        }
