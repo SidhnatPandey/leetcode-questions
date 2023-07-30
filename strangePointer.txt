@@ -1,0 +1,19 @@
+class Solution {
+    public int strangePrinter(String s) {
+        int n = s.length();
+        int dp[][] = new int[n][n];
+        for(int p[] : dp){
+            Arrays.fill(p, -1);
+        }
+        return solve(0, n-1, s, dp);
+    }
+    int solve(int i, int j, String s, int[][] dp){
+        if(i==j) return 1;
+        if(dp[i][j]!=-1) return dp[i][j];
+        int minTruns = Integer.MAX_VALUE;
+        for(int k=i; k<j; k++){
+            minTruns = Math.min(minTruns, solve(i, k, s, dp)+solve(k+1, j, s, dp));
+        }
+        return dp[i][j] = (s.charAt(i)==s.charAt(j))? minTruns-1 : minTruns;
+    }
+}
