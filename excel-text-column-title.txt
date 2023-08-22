@@ -1,0 +1,23 @@
+class Solution{
+    public String convertToTitle(int n){
+        StringBuilder result = new StringBuilder("");
+        while (n > 0) {
+            int remainder = n % 26;
+            if (remainder == 0) {
+                result.append('Z');
+                n = (n / 26) - 1;
+            }else {
+                result.append((char)(remainder + 64)); 
+                n = n / 26;
+            }
+        }
+        return (result.reverse()).toString();
+    }
+}
+
+/*
+
+TC : O(N)
+SC : O(1)
+
+*/
